@@ -3,7 +3,7 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 // import store from ".App/src/Redux/store.js"
@@ -16,7 +16,10 @@ function App() {
   // initializing dispatch - to communicate with store
 
   const dispatch = useDispatch();
-  let newGif = "";
+
+  useEffect(() => {
+    dispatch({ type: "FETCH_GIFS", payload: 'Welcome' })
+  }, [])
 
   function onClick(event) {
     // newGif = input[0].data[0].url;
@@ -24,7 +27,7 @@ function App() {
     setUserInput("");
   }
 
-  // console.log(input[0].data[0].url)
+  // console.log(input.data || 'None')
 
   return (
     <div>
@@ -61,9 +64,14 @@ function App() {
         </Button>
       </Stack>
       <div>
-        {/* map over an array of gifs */}
-        {/* state is an array - input is an array - data is an array */}
-        {newGif}
+        {input.data?.map((obj) => {
+          return (
+            <>
+              <p>{obj.id}</p>
+              <img src={`${obj?.image?.url}`}/>
+            </>)
+        })}
+
       </div>
     </div>
   );

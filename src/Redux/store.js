@@ -9,7 +9,7 @@ import axios from "axios";
 const input = (state = [], action) => {
   if (action.type === "SET_INPUT") {
     console.log('in input reducer', action.payload);
-    return [action.payload]
+    return action.payload
   }
   //else default
   return state;
