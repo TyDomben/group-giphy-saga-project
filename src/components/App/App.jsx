@@ -16,16 +16,16 @@ function App() {
   const dispatch = useDispatch();
 
   function onClick(event) {
-    axios
-      .get("/api/gif")
-      .then((response) => {
-        console.log(response.data);
-        dispatch({ type: "SET_INPUT", payload: response.data });
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-
+    // axios
+    //   .get("/api/gif")
+    //   .then((response) => {
+    //     console.log(response.data);
+    //     dispatch({ type: "SET_INPUT", payload: response.data });
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
+    dispatch({ type: "FETCH_GIFS", payload: userInput });
     setUserInput("");
   }
 
