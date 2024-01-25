@@ -1,4 +1,7 @@
 -- Database name should be: giphy_search_favorites
+DROP TABLE IF EXISTS "favorites";
+
+DROP TABLE IF EXISTS "categories";
 
 -- Categories table:
 CREATE TABLE "categories" (
@@ -7,9 +10,9 @@ CREATE TABLE "categories" (
 );
 
 -- Default categories. You may change these. 🙂
-INSERT INTO "categories"
-  ("name")
-  VALUES
+INSERT INTO
+  "categories" ("name")
+VALUES
   ('wild'),
   ('uproarious'),
   ('poignant'),
@@ -17,7 +20,6 @@ INSERT INTO "categories"
   ('whimsical');
 
 -- Favorites table:
-
 -- You'll need a "favorites" table for storing each instance of
 -- a Giphy image that has been "favorited."
 -- Each favorite image can be assigned one of the existing
