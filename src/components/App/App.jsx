@@ -4,10 +4,19 @@ import TextField from "@mui/material/TextField";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import { useState } from "react";
+import { useSelector, useDispatch} from "react-redux";
 
 function App() {
   // setup local state
   const [userInput, setUserInput] = useState("");
+  // bringing our store into the app to access
+  const store = useSelector((store) => store.input);
+  // initializing dispatch - to communicate with store
+  const dispatch = useDispatch();
+
+  function onClick(event) {
+    dispatch({ type: "SET_INPUT", payload: userInput });
+  }
 
   return (
     <div>
@@ -45,7 +54,7 @@ function App() {
         {/* button will reset the DOM and submit data */}
         <Button
           onClick={() => {
-            alert("clicked");
+            onClick();
           }}
           variant="contained"
         >
