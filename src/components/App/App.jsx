@@ -4,7 +4,7 @@ import TextField from "@mui/material/TextField";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import { useState } from "react";
-import { useSelector, useDispatch} from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 function App() {
   // setup local state
@@ -16,6 +16,7 @@ function App() {
 
   function onClick(event) {
     dispatch({ type: "SET_INPUT", payload: userInput });
+    setUserInput("");
   }
 
   return (
@@ -30,6 +31,7 @@ function App() {
           sx={{
             margin: "100px",
           }}
+          value={userInput}
           onChange={(event) => {
             console.log(event.target.value);
             // setting the local state to what the user is inputting
