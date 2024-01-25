@@ -17,20 +17,17 @@ function App() {
   function onClick(event) {
     dispatch({ type: "SET_INPUT", payload: userInput });
     setUserInput("");
+    axios.get("/api/gif").then
   }
 
   return (
     <div>
       <Box
         sx={{
-          width: 500,
           maxWidth: "100%",
         }}
       >
         <TextField
-          sx={{
-            margin: "100px",
-          }}
           value={userInput}
           onChange={(event) => {
             console.log(event.target.value);
@@ -46,13 +43,7 @@ function App() {
         {/* render the value of userInput */}
         {userInput}
       </p>
-      <Stack
-        sx={{
-          marginLeft: "100px",
-        }}
-        spacing={2}
-        direction="row"
-      >
+      <Stack spacing={2} direction="row">
         {/* button will reset the DOM and submit data */}
         <Button
           onClick={() => {
@@ -66,5 +57,4 @@ function App() {
     </div>
   );
 }
-
 export default App;
