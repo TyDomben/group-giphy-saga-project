@@ -6,10 +6,10 @@ import createSagaMiddleware from "redux-saga";
 import axios from "axios";
 
 //reducer "input" if SET_INPUT is reveived set that input as the state
-const input = (state = "", action) => {
+const input = (state = [], action) => {
   if (action.type === "SET_INPUT") {
     console.log('in input reducer', action.payload);
-    return action.payload
+    return [action.payload]
   }
   //else default
   return state;

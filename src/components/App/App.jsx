@@ -6,28 +6,25 @@ import Button from "@mui/material/Button";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
+// import store from ".App/src/Redux/store.js"
 
 function App() {
   // setup local state
   const [userInput, setUserInput] = useState("");
-  // bringing our store into the app to access
-  const store = useSelector((store) => store.input);
+
+  const input = useSelector((store) => store.input);
   // initializing dispatch - to communicate with store
+
   const dispatch = useDispatch();
+  let newGif = "";
 
   function onClick(event) {
-    // axios
-    //   .get("/api/gif")
-    //   .then((response) => {
-    //     console.log(response.data);
-    //     dispatch({ type: "SET_INPUT", payload: response.data });
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
+    // newGif = input[0].data[0].url;
     dispatch({ type: "FETCH_GIFS", payload: userInput });
     setUserInput("");
   }
+
+  // console.log(input[0].data[0].url)
 
   return (
     <div>
@@ -63,6 +60,11 @@ function App() {
           submit
         </Button>
       </Stack>
+      <div>
+        {/* map over an array of gifs */}
+        {/* state is an array - input is an array - data is an array */}
+        {newGif}
+      </div>
     </div>
   );
 }
