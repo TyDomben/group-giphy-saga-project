@@ -5,6 +5,7 @@ import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import axios from "axios";
 
 function App() {
   // setup local state
@@ -15,9 +16,17 @@ function App() {
   const dispatch = useDispatch();
 
   function onClick(event) {
-    dispatch({ type: "SET_INPUT", payload: userInput });
+    axios
+      .get("/api/gif")
+      .then((response) => {
+        console.log(response.data);
+        dispatch({ type: "SET_INPUT", payload: response.data });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
     setUserInput("");
-    axios.get("/api/gif").then
   }
 
   return (
