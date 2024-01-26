@@ -5,16 +5,16 @@ import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import axios from "axios";
-// import store from ".App/src/Redux/store.js"
+import GiphyResults from "../GiphyResults/GiphyResults";
 
 function App() {
   // setup local state
   const [userInput, setUserInput] = useState("");
 
+  // input is a misnomer, actually the results from the GET to Giphy
   const input = useSelector((store) => store.input);
-  // initializing dispatch - to communicate with store
 
+  // initializing dispatch - to communicate with store
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -22,12 +22,11 @@ function App() {
   }, [])
 
   function onClick(event) {
-    // newGif = input[0].data[0].url;
     dispatch({ type: "FETCH_GIFS", payload: userInput });
     setUserInput("");
   }
 
-  // console.log(input.data || 'None')
+  console.log(input.data)
 
   return (
     <div>
@@ -64,14 +63,14 @@ function App() {
         </Button>
       </Stack>
       <div>
-        {input.data.map((obj) => {
+        {/* {input.data.map((obj) => {
           return (
             <>
               <p>{obj.id}</p>
               <img src={`${obj.image.url}`}/>
             </>)
-        })}
-
+        })} */}
+        <GiphyResults />
       </div>
     </div>
   );
