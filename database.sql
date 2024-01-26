@@ -3,6 +3,12 @@ DROP TABLE IF EXISTS "favorites";
 
 DROP TABLE IF EXISTS "categories";
 
+-- favorite table:
+Create TABLE "favorites" (
+  "" SERIAL PRIMARY KEY,
+  "" VARCHAR (100) NOT NULL
+);
+
 -- Categories table:
 CREATE TABLE "categories" (
   "id" SERIAL PRIMARY KEY,
