@@ -48,7 +48,7 @@ router.put("/:id", (req, res) => {
   pool
     .query(sqlText, queryParams)
     .then((result) => {
-      res.sendStatus(200);
+      res.sendStatus(201);
     })
     .catch((error) => {
       console.log("ERROR in server POST route");
@@ -58,7 +58,18 @@ router.put("/:id", (req, res) => {
 
 // delete a favorite
 router.delete("/:id", (req, res) => {
-  res.sendStatus(200);
+  // req.body should contain a category_id to add to this favorite image
+  const sqlText = `DELETE FROM "favorites" WHERE "id" = $1;`;
+  const queryParams = [req.params.id];
+  pool
+    .query(sqlText, queryParams)
+    .then((result) => {
+      res.sendStatus(200);
+    })
+    .catch((error) => {
+      console.log("ERROR in server POST route");
+      console.log(error);
+    });
 });
 
 module.exports = router;
