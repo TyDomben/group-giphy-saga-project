@@ -5,9 +5,13 @@ DROP TABLE IF EXISTS "categories";
 
 -- favorite table:
 Create TABLE "favorites" (
-  "" SERIAL PRIMARY KEY,
-  "" VARCHAR (100) NOT NULL
+  "id" SERIAL PRIMARY KEY,
+  "title"  VARCHAR (500) NOT NULL,
+  "url" VARCHAR (500) NOT NULL,
+  "category_id" INT
 );
+
+DROP TABLE "favorites";
 
 -- Categories table:
 CREATE TABLE "categories" (
@@ -32,3 +36,5 @@ VALUES
 -- categories via foreign key. This is a one-to-many relationship:
 --    One favorite has one category.
 --    One category can be had by many favorites.
+
+-- return <img key={gif.id} src={gif.images.original.webp} alt={gif.title}/>
