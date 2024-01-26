@@ -43,7 +43,17 @@ router.post("/", (req, res) => {
 // update a favorite's associated category
 router.put("/:id", (req, res) => {
   // req.body should contain a category_id to add to this favorite image
-  res.sendStatus(200);
+  const sqlText = `UPDATE "favorites" SET "category_id"=$1 WHERE "id" = $2;`;
+  const queryParams = [req.body.category_id, req.params.id];
+  pool
+    .query(sqlText, queryParams)
+    .then((result) => {
+      res.sendStatus(200);
+    })
+    .catch((error) => {
+      console.log("ERROR in server POST route");
+      console.log(error);
+    });
 });
 
 // delete a favorite
