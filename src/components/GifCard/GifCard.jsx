@@ -6,19 +6,45 @@ import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import { useDispatch } from "react-redux";
+import { useState } from "react";
 
-const GifCard = ({gif}) => {
-  const dispatch = useDispatch()
-  
-    const handlePost = () => {
+const GifCard = ({ gif }) => {
+  const [isFavorited, setIsFavorited] = useState(false);
+
+  const dispatch = useDispatch();
+
+  const favButton = () => {
+    if (isFavorited === false) {
+      return (
+        <Button
+          onChange={() => setIsFavorited(true)}
+          variant="outlined"
+          onClick={handlePost}
+        >
+          FAVORITE
+        </Button>
+      );
+    }
+    return (
+      <Button disabled variant="outlined">
+        FAVORITE
+      </Button>
+    );
+  };
+
+  const handlePost = () => {
     // console.log('in hanlde post');
-    dispatch({type: "POST_FAVORITE", payload: {
+    setIsFavorited(true);
+    dispatch({
+      type: "POST_FAVORITE",
+      payload: {
         title: gif.title,
-        url: gif.images.original.webp
-    }})
-  }
-  
-    const card = (
+        url: gif.images.original.webp,
+      },
+    });
+  };
+
+  const card = (
     <React.Fragment>
       <CardContent></CardContent>
       {/* display here */}
@@ -31,7 +57,16 @@ const GifCard = ({gif}) => {
         <Card variant="outlined">
           {card}
           <Stack direction="row" spacing={2}>
-            <Button variant="outlined" onClick={handlePost}>FAVORITE</Button>
+            {/* <Button onChange={() => setIsFavorited(true)} variant="outlined" onClick={handlePost}>FAVORITE</Button> */}
+            {isFavorited ? (
+              <Button disabled variant="outlined">
+                FAVORITE
+              </Button>
+            ) : (
+              <Button variant="outlined" onClick={handlePost}>
+                FAVORITE
+              </Button>
+            )}
           </Stack>
           <img key={gif.id} src={gif.images.original.webp} alt={gif.title} />
         </Card>
