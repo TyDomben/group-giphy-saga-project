@@ -64,11 +64,11 @@ function App() {
         </Button>
       </Stack>
       <div>
-        {input.data?.map((obj) => {
+        {input.data.map((obj) => {
           return (
             <>
               <p>{obj.id}</p>
-              <img src={`${obj?.image?.url}`}/>
+              <img src={`${obj.image.url}`}/>
             </>)
         })}
 
