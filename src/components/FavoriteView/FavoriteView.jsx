@@ -18,6 +18,7 @@ import { useState, useEffect } from "react";
 
 function FavoriteView() {
   const [favoriteGifs, setFavoriteGifs] = useState([]);
+  // const [category, setCategory] = useState('')
   const fetchFavorites = () => {
     axios
       .get("/api/favorites")
@@ -35,6 +36,7 @@ function FavoriteView() {
   }, []);
 
   const setCategories = (gifId, newCategoryId) => {
+    // setCategory(newCategoryId)
     axios
       .put(`/api/favorites/${gifId}`, { category_id: newCategoryId })
       .then((response) => {
@@ -70,7 +72,7 @@ function FavoriteView() {
                   <Select
                     autoWidth
                     label="category"
-                    value={''}
+                    value={category}
                     onChange={(event) => setCategories(gif.id, event.target.value)}
                   >
                     <MenuItem value={1}>wild</MenuItem>
