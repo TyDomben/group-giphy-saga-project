@@ -17,6 +17,7 @@ const input = (state = {}, action) => {
 // rootsaga runs all generator functions
 function* rootSaga() {
   yield takeLatest("FETCH_GIFS", fetchGifs);
+  yield takeLatest("POST_FAVORITE", postFavorite)
 }
 // creates fetchGifsyield axios.get("/api/gif", action.payload);
 function* fetchGifs(action) {
@@ -32,6 +33,14 @@ function* fetchGifs(action) {
     console.log(error);
   }
 }
+
+function * postFavorite(action) {
+  try {
+    yield axios.post('/api/favorites', action.payload)
+  } catch (error) {
+    console.log(error);
+  }
+} 
 
 // initializing saga middleware
 const sagaMiddleware = createSagaMiddleware();

@@ -6,6 +6,7 @@ import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
+import GifCard from "../GifCard/GifCard";
 
 const GiphyResults = () => {
   const results = useSelector((store) => store.input);
@@ -13,6 +14,7 @@ const GiphyResults = () => {
   const card = (
     <React.Fragment>
       <CardContent></CardContent>
+      {/* display here */}
       <CardActions></CardActions>
     </React.Fragment>
   );
@@ -31,21 +33,22 @@ const GiphyResults = () => {
         <div>
           {results.data.map((gif) => {
             return (
-              <>
-                <Box sx={{ minWidth: 275 }}>
-                  <Card variant="outlined">
-                    {card}
-                    <Stack direction="row" spacing={2}>
-                      <Button variant="outlined">FAVORITE</Button>
-                    </Stack>
-                    <img
-                      key={gif.id}
-                      src={gif.images.original.webp}
-                      alt={gif.title}
-                    />
-                  </Card>
-                </Box>
-              </>
+            //   <>
+            //     <Box sx={{ minWidth: 275 }}>
+            //       <Card variant="outlined">
+            //         {card}
+            //         <Stack direction="row" spacing={2}>
+            //           <Button variant="outlined">FAVORITE</Button>
+            //         </Stack>
+            //         <img
+            //           key={gif.id}
+            //           src={gif.images.original.webp}
+            //           alt={gif.title}
+            //         />
+            //       </Card>
+            //     </Box>
+            //   </>
+            <GifCard gif={gif} key={gif.id}/>
             );
           })}
         </div>

@@ -12,7 +12,7 @@ router.post("/", (req, res) => {
       )
       .then((response) => {
         res.send(response.data)
-        console.log(response);
+        // console.log(response);
       })
       .catch((err) => {
         console.log(err);
