@@ -15,7 +15,6 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import axios from "axios";
 import { useState, useEffect } from "react";
-import FavCard from "../FavCard/FavCard";
 
 function FavoriteView() {
   const [favoriteGifs, setFavoriteGifs] = useState([]);
@@ -35,11 +34,75 @@ function FavoriteView() {
     fetchFavorites();
   }, []);
 
+  const setCategories = (gifId, newCategoryId) => {
+    axios
+      .put(`/api/favorites/${gifId}`, { category_id: newCategoryId })
+      .then((response) => {
+        console.log(response.data);
+        fetchFavorites();
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+// delete favororite
+  function deleteFavorite(gifId) {
+    axios
+      .delete(`/api/favorites/${gifId}`)
+      .then((response) => {
+        fetchFavorites();
+      })
+      .catch((error) => {
+        console.log("Error in delete", error);
+      });
+  }
+
+  const card = (
+    <React.Fragment>
+      <CardContent></CardContent>
+      {/* display here */}
+      <CardActions></CardActions>
+    </React.Fragment>
+  );
+
   return (
     <div>
-      {favoriteGifs.map((gif) => {
-        return <FavCard gif={gif} fetchFavorites={fetchFavorites} key={gif.id} />;
-      })}
+      {favoriteGifs.map((gif) => (
+        <div key={gif.id}>
+          <Box sx={{ minWidth: 275 }}>
+            <Card variant="outlined">
+              {/* {card} */}
+              {/* delete */}
+              <img src={gif.url} alt={gif.title} />
+              <button onClick={() => deleteFavorite(gif.id)}>
+                Remove Favorite
+              </button>
+              <Stack direction="column" spacing={10}>
+                {/* <Button onChange={() => setIsFavorited(true)} variant="outlined" onClick={handlePost}>FAVORITE</Button> */}
+                <FormControl sx={{ m: 1, minWidth: 80 }}>
+                  <InputLabel id={`label-${gif.id}`}>
+                    Choose Category
+                  </InputLabel>
+                  <Select
+                    autoWidth
+                    label="category"
+                    value={""}
+                    onChange={(event) =>
+                      setCategories(gif.id, event.target.value)
+                    }
+                  >
+                    <MenuItem value={1}>wild</MenuItem>
+                    <MenuItem value={2}>uproarious</MenuItem>
+                    <MenuItem value={3}>poignant</MenuItem>
+                    <MenuItem value={4}>felicitous</MenuItem>
+                    <MenuItem value={5}>whimsical</MenuItem>
+                  </Select>
+                </FormControl>
+              </Stack>
+            </Card>
+          </Box>
+        </div>
+      ))}
     </div>
   );
 }
