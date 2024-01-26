@@ -14,6 +14,7 @@ import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import axios from "axios";
+import Button from "@mui/material/Button";
 import { useState, useEffect } from "react";
 
 function FavoriteView() {
@@ -45,7 +46,7 @@ function FavoriteView() {
         console.error(error);
       });
   };
-// delete favororite
+  // delete favororite
   function deleteFavorite(gifId) {
     axios
       .delete(`/api/favorites/${gifId}`)
@@ -70,13 +71,26 @@ function FavoriteView() {
       {favoriteGifs.map((gif) => (
         <div key={gif.id}>
           <Box sx={{ minWidth: 275 }}>
-            <Card variant="outlined">
+            <Card variant="outlined" sx={{ minWidth: 275 }}>
+              <CardContent>
+                <h2>{gif.title}</h2>
+
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  onClick={() => deleteFavorite(gif.id)}
+                  style={{
+                    backgroundColor: "red",
+                    color: "white",
+                  }}
+                >
+                  Delete
+                </Button>
+              </CardContent>
               {/* {card} */}
-              {/* delete */}
+
               <img src={gif.url} alt={gif.title} />
-              <button onClick={() => deleteFavorite(gif.id)}>
-                Remove Favorite
-              </button>
+
               <Stack direction="column" spacing={10}>
                 {/* <Button onChange={() => setIsFavorited(true)} variant="outlined" onClick={handlePost}>FAVORITE</Button> */}
                 <FormControl sx={{ m: 1, minWidth: 80 }}>
